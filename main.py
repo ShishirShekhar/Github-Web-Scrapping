@@ -1,5 +1,6 @@
 # Import necessary modules
 import numpy as np
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup as bs
 
@@ -64,17 +65,16 @@ for i in range(len(block)):
     else:
         fork.append(np.nan)
 
+# Create dict of trend values
+trend_dict = {
+    "Author": author,
+    "Repo": repo,
+    "Lang": lang,
+    "Star": star,
+    "Fork": fork
+}
 
-
-# Print details of the treding repos
-print("\n")
-print("Details of Trending Repos")
-print("*" * 50)
-for i in range(len(author)):
-    print("Author   ==>", author[i])
-    print("Repo     ==>", repo[i])
-    print("Language ==>", lang[i])
-    print("Star     ==>", star[i])
-    print("Fork     ==>", fork[i])
-    print("-" * 50)
-    print("\n")
+# Create dataframe of trend values
+trend_df = pd.DataFrame(trend_dict)
+# Create CSV of the dataframe
+trend_df.to_csv("Treding Repos on GitHub.csv")
