@@ -1,13 +1,21 @@
 # Import necessary modules
+import streamlit as st
 from trending_repo import get_trend
 from featured_topics import get_topic
 
+# Give title to your stremlit page
+st.title("Github Web Scrapping")
 
-if __name__ == "__main__":
-    # Get the treding dataframe
-    trend_df = get_trend()
-    print(trend_df.head())
+# Get the dataframe
+trend_df = get_trend()
+topic_df = get_topic()
 
-    # Get the featured topics dataframe
-    topic_df = get_topic()
-    print(topic_df.head())
+# Create checkbox to show the data in the dataframe
+check1 = st.checkbox("Show Github Trending Repository")
+if check1:
+    st.dataframe(trend_df)
+
+check2 = st.checkbox("Show Github Featured Topics")
+if check2:
+    st.dataframe(topic_df)
+

@@ -52,5 +52,5 @@ def get_topic():
         # Create dataframe of trend values
         topic_df = pd.DataFrame(topic_dict)
         # Create CSV of the dataframe
-        topic_df.to_csv("Featured Topic on GitHub.csv")
+        # topic_df.to_csv("Featured Topic on GitHub.csv")
         return topic_df
