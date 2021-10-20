@@ -22,11 +22,11 @@ def get_trend():
         block = soup.find_all("article", {"class": "Box-row"})
 
         # Create list of different details
-        author = []
-        repo = []
-        lang = []
-        star = []
-        fork = []
+        author_list = []
+        repository_list = []
+        language_list = []
+        star_list = []
+        fork_list = []
 
         # Iterate through each block of article tag
         for i in range(len(block)):
@@ -37,42 +37,42 @@ def get_trend():
             # Split on the basis of /
             value_list = title.split("/")
             # Append the values of author and repo
-            author.append(value_list[0])
-            repo.append(value_list[1][2:])
+            author_list.append(value_list[0])
+            repository_list.append(value_list[1][2:])
 
             # Get the values language that is in span tag
-            lang_list = block[i].find_all("span", {"itemprop": "programmingLanguage"})
-            # Check if lang_list available
-            if (lang_list):
-                lang.append(lang_list[0].text)
+            language = block[i].find_all("span", {"itemprop": "programmingLanguage"})
+            # Check if language available
+            if (language):
+                language_list.append(language[0].text)
             else:
-                lang.append(np.nan)
+                language_list.append(np.nan)
 
             # Get the values star that is in a tag
-            star_list = block[i].find_all("a", {"class": "Link--muted d-inline-block mr-3"})
+            star = block[i].find_all("a", {"class": "Link--muted d-inline-block mr-3"})
             # Check if star_list available
-            if (star_list):
+            if (star):
                 # Remove extra spaceses from the text values
-                star.append(star_list[0].text.strip())
+                star_list.append(star[0].text.strip())
             else:
-                star.append(np.nan)
+                star_list.append(np.nan)
 
             # Get the values fork that is in a tag
-            fork_list = block[i].find_all("a", {"class": "Link--muted d-inline-block mr-3"})
+            fork = block[i].find_all("a", {"class": "Link--muted d-inline-block mr-3"})
             # Check if star_list available
-            if (fork_list):
+            if (fork):
                 # Remove extra spaceses from the text values
-                fork.append(fork_list[1].text.strip())
+                fork_list.append(fork[1].text.strip())
             else:
-                fork.append(np.nan)
+                fork_list.append(np.nan)
 
         # Create dict of trend values
         trend_dict = {
-            "Author": author,
-            "Repo": repo,
-            "Lang": lang,
-            "Star": star,
-            "Fork": fork
+            "Author": author_list,
+            "Repository": repository_list,
+            "Language": language_list,
+            "Star": star_list,
+            "Fork": fork_list
         }
 
         # Create dataframe of trend values
